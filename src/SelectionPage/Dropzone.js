@@ -3,105 +3,196 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { CircularProgress } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import { PhotoCamera } from "@material-ui/icons";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import "react-toastify/dist/ReactToastify.css";
+import { v4 as uuidv4 } from 'uuid';
 
-export function MyDropzone() {
+export const MyDropzone = () => {
   const [loaded, setLoaded] = React.useState(0);
+
+  React.useEffect(() => {
+    // Initialize UUID if not exists
+    if (!sessionStorage.getItem('uuid')) {
+      sessionStorage.setItem('uuid', JSON.stringify(uuidv4()));
+    }
+  }, []);
+
   const onDrop = useCallback((acceptedFiles) => {
+    if (!acceptedFiles || acceptedFiles.length === 0) {
+      toast.error("No files selected");
+      return;
+    }
+
+    const uuid = sessionStorage.getItem('uuid');
+    if (!uuid) {
+      toast.error("Session error: No UUID found. Please refresh the page.");
+      return;
+    }
+
+    console.log('Current UUID:', uuid);
+    const parsedUuid = JSON.parse(uuid);
+
     const formData = new FormData();
     const folderPath = [];
-    const uuid = JSON.parse(sessionStorage.uuid);
-    acceptedFiles &&
+
+    try {
       acceptedFiles.forEach((file) => {
-        let path = file.path.split("/")[1];
-        formData.append(`${uuid}/${path}`, file);
+        // Log file information
+        console.log('Processing file:', {
+          name: file.name,
+          path: file.path,
+          size: file.size,
+          type: file.type
+        });
 
-        const fileAdd = { path: file.path, uuid: uuid };
-        folderPath.push(fileAdd);
+        // Use file name if path is not available
+        const fileName = file.name;
+        const fieldName = `${parsedUuid}/${fileName}`;
+        
+        console.log('Adding file to formData:', fieldName);
+        formData.append(fieldName, file);
+
+        folderPath.push({
+          path: fileName,
+          uuid: parsedUuid
+        });
       });
 
-    axios
-      .post("http://localhost:8443/uploadPath", folderPath)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        window.location.href = "/error";
-        console.log(error);
-      });
+      console.log('Folder paths to create:', folderPath);
 
-    axios
-      .post("http://localhost:8443/uploadFiles", formData, {
-        onUploadProgress: (ProgressEvent) => {
-          setLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-        },
-      })
-      .then(function (response) {
-        toast.success("upload success");
-      })
-      .catch(function (error) {
-        toast.info(error);
-        toast.info("Each File should be within 10Mb limit");
-        toast.info("Supported Files: jpg, jpeg, png");
-        toast.error("upload fail");
-      });
+      // First create the upload path
+      axios
+        .post("http://localhost:8443/uploadPath", folderPath, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(function (response) {
+          console.log("Path creation response:", response.data);
+          
+          // Then upload the files
+          axios
+            .post("http://localhost:8443/uploadFiles", formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              },
+              onUploadProgress: (ProgressEvent) => {
+                const progress = (ProgressEvent.loaded / ProgressEvent.total) * 100;
+                console.log('Upload progress:', progress);
+                setLoaded(progress);
+              },
+            })
+            .then(function (response) {
+              console.log("File upload response:", response.data);
+              toast.success("Upload successful");
+              setLoaded(0);
+            })
+            .catch(function (error) {
+              console.error("Upload error details:", {
+                message: error.message,
+                response: error.response?.data,
+                status: error.response?.status
+              });
+              toast.error(error.response?.data?.error || "Upload failed");
+            });
+        })
+        .catch(function (error) {
+          console.error("Path creation error details:", {
+            message: error.message,
+            response: error.response?.data,
+            status: error.response?.status
+          });
+          toast.error(error.response?.data?.error || "Failed to create upload path");
+        });
+    } catch (error) {
+      console.error("File processing error:", error);
+      toast.error("Error processing files: " + error.message);
+    }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png,image/jpg",
+    accept: "image/*",
+    multiple: true
   });
 
   return (
-    <div style={{ zIndex: 2 }}>
-      <div style={{ zIndex: 2 }} {...getRootProps()}>
-        <input
-          style={{ zIndex: 2 }}
-          {...getInputProps()}
-          directory=""
-          webkitdirectory=""
-          type="file"
-        />
+    <div {...getRootProps()} className="dropzone">
+      <input {...getInputProps()} />
+      <div className="dropzone-content">
+        <CloudUploadIcon style={{ 
+          fontSize: 64,
+          color: 'var(--accent-color)',
+          marginBottom: '1.5rem'
+        }} />
         {isDragActive ? (
-          <p style={{ zIndex: 2 }}>Drop the files here ...</p>
+          <p style={{ 
+            fontSize: '1.25rem',
+            color: 'var(--text-primary)',
+            margin: '0.5rem 0'
+          }}>
+            Drop files here
+          </p>
         ) : (
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
-            style={{ zIndex: 2, justifyContent: "center", display: "flex" }}
-            size="medium"
-          >
-            <PhotoCamera />
-          </IconButton>
+          <>
+            <p style={{ 
+              fontSize: '1.25rem',
+              color: 'var(--text-primary)',
+              margin: '0.5rem 0'
+            }}>
+              Click or drag files to upload
+            </p>
+            <p style={{ 
+              fontSize: '1rem', 
+              color: 'var(--text-secondary)',
+              margin: '0.5rem 0',
+              maxWidth: '400px',
+              textAlign: 'center',
+              lineHeight: '1.5'
+            }}>
+              Supported files: JPG, JPEG, PNG (max 10MB each)
+            </p>
+          </>
         )}
-
-        <div className="form-group">
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={true}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
+      </div>
+      {loaded > 0 && (
+        <div className="progress-wrapper" style={{ 
+          marginTop: '2rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1rem'
+        }}>
+          <CircularProgress 
+            variant="determinate" 
+            value={loaded} 
+            style={{ 
+              color: 'var(--accent-color)',
+              width: '48px',
+              height: '48px'
+            }}
           />
+          <p style={{ 
+            marginTop: '0.5rem', 
+            color: 'var(--text-secondary)',
+            fontSize: '1rem'
+          }}>
+            {Math.round(loaded)}% uploaded
+          </p>
         </div>
-      </div>
-      <div
-        style={{
-          marginTop: "270px",
-          zIndex: 2,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <CircularProgress variant="determinate" value={loaded} />
-      </div>
+      )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
-}
+};

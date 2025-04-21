@@ -1,0 +1,66 @@
+:root {
+  --astral-black: #000000;
+  --astral-dark-bg: #0a0a0a;
+  --astral-teal: #00E5FF;
+  --astral-green: #4DFF4D; 
+  --astral-glow: 0 0 15px rgba(0, 229, 255, 0.7);
+  --astral-border-radius: 8px;
+}
+
+/* Canvas controls styling */
+.editor-canvas-controls {
+  background-color: rgba(5, 10, 15, 0.7) !important;
+  border: 1px solid #4DFF4D !important;
+  border-radius: var(--astral-border-radius) !important;
+  padding: 12px !important;
+  margin-bottom: 15px !important;
+}
+
+/* Input styling for canvas width/height */
+.editor-dimension-input {
+  background-color: rgba(10, 15, 20, 0.7) !important;
+  border: 1px solid #4DFF4D !important;
+  color: white !important;
+  border-radius: var(--astral-border-radius) !important;
+  padding: 5px 8px !important;
+  margin: 0 5px !important;
+}
+
+/* Control panel styling */
+.editor-control-panel {
+  background-color: rgba(5, 10, 15, 0.7) !important;
+  border: 1px solid var(--astral-teal) !important;
+  border-radius: var(--astral-border-radius) !important;
+  padding: 12px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Editor section title styling */
+.editor-section-title {
+  color: var(--astral-teal) !important;
+  text-shadow: var(--astral-glow) !important;
+  margin-bottom: 10px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Editor buttons */
+.editor-button {
+  background-color: var(--astral-teal) !important;
+  color: var(--astral-black) !important;
+  font-weight: 600 !important;
+  border: none !important;
+  border-radius: var(--astral-border-radius) !important;
+  transition: all 0.2s ease !important;
+  padding: 8px 16px !important;
+}
+
+.editor-button:hover {
+  background-color: var(--astral-green) !important;
+  box-shadow: var(--astral-glow) !important;
+}
+
+/* Slider styling */
+.editor-slider {
+  accent-color: var(--astral-teal) !important;
+} 

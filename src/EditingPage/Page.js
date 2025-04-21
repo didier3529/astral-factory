@@ -124,63 +124,72 @@ export const Page = (props) => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', width: '100%', backgroundColor: '#000000', fontFamily: 'var(--professional-font)' }}>
       <div
+        className="editor-control-panel gray-element animated-border"
         style={{
           width: "15%",
-          float: "left",
-          backgroundColor: "rgb(23, 23, 44)",
           height: "100vh",
-          padding: "5px",
-          borderRadius: "10px",
+          padding: "20px",
+          borderRadius: "8px",
           overflowX: "hidden",
           overflowY: "auto",
           zIndex: 20,
           transition: "width .35s",
+          backgroundColor: "#000000",
+          borderRight: "2px solid #4DFF4D"
         }}
       >
         <TreesTemp folderData={props.folderStructure} />
       </div>
       <div
+        className="editor-canvas-container gray-element"
         style={{
           width: "70%",
-          float: "left",
           height: "100vh",
-          padding: "5px",
+          padding: "20px",
+          backgroundColor: "#000000",
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px"
         }}
       >
         <div
+          className="editor-canvas-controls canvas-controls animated-border"
           style={{
             display: "flex",
             justifyContent: "center",
-            backgroundColor: "rgba(110, 110, 110, 0.658)",
-            color: "#fff",
-            fontFamily: "monospace",
-            marginTop: "3vh",
-            paddingRight: "5px",
+            alignItems: "center",
+            padding: "15px",
+            borderRadius: "8px",
+            backgroundColor: "#000000"
           }}
         >
-          <p>
+          <p className="editor-text-primary">
             Canvas Height:{" "}
             <input
+              className="canvas-dimension-input"
               onChange={(event) => {
                 setCanvasHeight({
                   value: JSON.parse(event.target.value),
                 });
               }}
+              placeholder="400"
             />
             &nbsp; px &nbsp;Canvas Width:{" "}
             <input
+              className="canvas-dimension-input"
               onChange={(event) => {
                 setCanvasWidth({
                   value: JSON.parse(event.target.value),
                 });
               }}
+              placeholder="400"
             />
             &nbsp; px
           </p>
         </div>
-        <div id="content">
+        <div id="content" className="canvas-area animated-border canvas-grid-detailed">
           <Items
             onClick={setCurrentElement}
             files={props.folderStructure}
@@ -192,107 +201,81 @@ export const Page = (props) => {
           />
         </div>
         <div
+          className="editor-canvas-controls canvas-controls animated-border"
           style={{
             display: "flex",
-            justifyContent: "right",
-            backgroundColor: "rgba(110, 110, 110, 0.658)",
-            color: "#fff",
-            fontFamily: "monospace",
-            marginTop: "-11vh",
-            paddingRight: "5px",
+            justifyContent: "flex-end",
+            padding: "15px",
+            borderRadius: "8px",
+            backgroundColor: "#000000"
           }}
         >
-          <p>
-            Selection: {selection.name} &nbsp; X: {coord.x} Y: {coord.y}
+          <p className="coordinate-display">
+            Selection: <span className="coordinate-value">{selection.name}</span> &nbsp; 
+            X: <span className="coordinate-value">{coord.x}</span> &nbsp;
+            Y: <span className="coordinate-value">{coord.y}</span>
           </p>
         </div>
       </div>
       <div
         style={{
           width: "15%",
-          float: "right",
-          borderRadius: "10px",
+          borderRadius: "8px",
           zIndex: 20,
-          marginTop: "10px",
+          padding: "20px",
+          backgroundColor: "#000000",
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px"
         }}
       >
         <div
+          className="editor-control-panel animated-border"
           style={{
-            backgroundColor: "#efefef",
             height: "100vh",
-            margin: "5px 0px 5px 5px ",
-            padding: "5px",
-            boxShadow:
-              "-5px 2px 4px -1px rgb(0 0 0 / 20%), -5px 4px 5px 0px rgb(0 0 0 / 14%), -5px 1px 10px 0px rgb(0 0 0 / 12%)",
+            padding: "20px",
+            backgroundColor: "#000000",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px"
           }}
         >
-          <div>
+          <div className="editor-section">
             <Editor currentValues={props.hashedElements} />
           </div>
-          <div>
+          <div className="manual-input-section">
             <EditorInput setValues={editValues} />
           </div>
-          <div
-            style={{
-              marginTop: "15px",
-              padding: "5px",
-            }}
-          >
-            <div style={{ justifyContent: "center", display: "flex" }}>
-              <Button
-                variant="contained"
-                style={{
-                  borderRadius: 35,
-                  backgroundColor: "#f50057",
-                  color: "#fff",
-                  padding: "10px 20px",
-                  fontSize: "13px",
-                }}
-                size="medium"
-                onClick={handleRarityOpen}
-              >
-                💎 Add Rarity 💎
-              </Button>
-            </div>
-            <div
-              style={{
-                justifyContent: "center",
-                display: "flex",
-                marginTop: "15px",
-              }}
+          <div className="button-container" style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "15px" }}>
+            <Button
+              className="editor-button"
+              variant="contained"
+              onClick={handleRarityOpen}
             >
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#21b6ae", color: "#fff" }}
-                size="large"
-                onClick={
-                  totalCopies && totalCopies.value > 10000 ? null : handleOpen
-                }
-              >
-                Generate
-              </Button>
-            </div>
-            <div>
-              <RarityModalComponent
-                isOpen={rarityOpen}
-                handleClose={handleRarityClose}
-                folderStructure={props.folderStructure}
-              />
-            </div>
-
-            <div>
-              <ModalComponent
-                isOpen={open}
-                handleClose={handleClose}
-                canvasHeight={canvasHeight.value}
-                canvasWidth={canvasWidth.value}
-                openLoadingModal={openLoadingModal}
-              />
-            </div>
-            <div>
-              <LoadingModalComponent isOpen={loadingModal} />
-            </div>
+              💎 Add Rarity 💎
+            </Button>
+            <Button
+              className="editor-button"
+              variant="contained"
+              size="large"
+              onClick={totalCopies && totalCopies.value > 10000 ? null : handleOpen}
+            >
+              Generate
+            </Button>
           </div>
+          <RarityModalComponent
+            isOpen={rarityOpen}
+            handleClose={handleRarityClose}
+            folderStructure={props.folderStructure}
+          />
+          <ModalComponent
+            isOpen={open}
+            handleClose={handleClose}
+            canvasHeight={canvasHeight.value}
+            canvasWidth={canvasWidth.value}
+            openLoadingModal={openLoadingModal}
+          />
+          <LoadingModalComponent isOpen={loadingModal} />
         </div>
       </div>
     </div>

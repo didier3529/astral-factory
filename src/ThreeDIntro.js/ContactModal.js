@@ -35,7 +35,7 @@ export const ContactModalComponent = (props) => {
       >
         <Fade in={props.isOpen}>
           <Box sx={style}>
-            <p style={{ color: "#fff", fontFamily: "monospace" }}>
+            <p style={{ color: "#fff", fontFamily: "var(--professional-font)", textTransform: "uppercase" }}>
               This is a Contact project
             </p>
           </Box>

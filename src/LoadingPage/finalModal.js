@@ -50,8 +50,9 @@ export const FinalModalComponent = (props) => {
                 display: "flex",
                 justifyContent: "flex-start",
                 color: "#fff",
-                fontFamily: "monospace",
+                fontFamily: "var(--professional-font)",
                 marginTop: "20px",
+                textTransform: "uppercase"
               }}
             >
               Hey Guys,
@@ -61,8 +62,8 @@ export const FinalModalComponent = (props) => {
                 display: "flex",
                 justifyContent: "center",
                 color: "#fff",
-                fontFamily: "monospace",
-                marginTop: "30px",
+                fontFamily: "var(--professional-font)",
+                marginTop: "30px"
               }}
             >
               Thanks a lot for using this tool , its been my pleasure serving
@@ -76,8 +77,9 @@ export const FinalModalComponent = (props) => {
                 display: "flex",
                 justifyContent: "flex-start",
                 color: "#fff",
-                fontFamily: "monospace",
+                fontFamily: "var(--professional-font)",
                 marginTop: "30px",
+                textTransform: "uppercase"
               }}
             >
               Regards, Bitrix
@@ -155,7 +157,7 @@ export const FinalModalComponent = (props) => {
                   Drop forget to drop me a piece of your collection 😉
                 </p>
                 <p style={{ marginTop: "10px", color: "#fff" }}>
-                  Do tag me as #sickalien in your posts as well , cheers !
+                  Do tag me as #astralfactory in your posts as well , cheers !
                 </p>
               </ol>
             </div>

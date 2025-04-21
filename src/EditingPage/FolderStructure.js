@@ -30,11 +30,12 @@ export default function TreesTemp(props) {
           display: "flex",
           fontWeight: "bold",
           fontSize: "20px",
-          fontFamily: "monospace",
+          fontFamily: "var(--professional-font)",
           color: "#fff",
+          textTransform: "uppercase"
         }}
       >
-        Folder Structure
+        FOLDER STRUCTURE
       </div>
       <List>
         <TreeView

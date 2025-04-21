@@ -9,6 +9,8 @@ import { Page } from "./Page";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { NavComponent } from "./Navbar";
 import axios from "axios";
+import './astral-editor-theme.css';
+import './edit-page-theme.css';
 
 export const ObjectContext = React.createContext();
 export const ObjectSelection = React.createContext();
@@ -112,7 +114,7 @@ export const EditingPage = () => {
             value={{ total: NumberOfCopiesState, dispatch3 }}
           >
             <CssBaseline>
-              <div style={{ maxHeight: "20px", zIndex: 21 }}>
+              <div style={{ maxHeight: "20px", zIndex: 21, marginBottom: "1.5rem" }}>
                 <NavComponent folderStructure={fileData} />
               </div>
               <div style={{ margin: "2px" }}>

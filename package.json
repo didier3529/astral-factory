@@ -1,5 +1,5 @@
 {
-  "name": "nftautomation",
+  "name": "astral-factory-nft",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,7 +15,7 @@
     "archiver": "^5.3.0",
     "aws-sdk": "^2.1066.0",
     "axios": "^0.25.0",
-    "canvas": "^2.9.0",
+    "canvas": "^2.11.2",
     "cors": "^2.8.5",
     "directory-tree": "^3.0.1",
     "dotenv": "^14.3.2",
@@ -25,7 +25,6 @@
     "lowdb": "^1.0.0",
     "mongodb": "^4.3.1",
     "multer": "^1.4.4",
-    "node-sass": "^7.0.1",
     "nodemon": "^2.0.15",
     "prop-types": "^15.6.2",
     "raf": "latest",
@@ -46,8 +45,8 @@
   "scripts": {
     "devserver": "nodemon server.js",
     "server": "node server.js",
-    "dev": "export PORT=2095 && react-scripts start",
-    "prod": "export PORT=80 && react-scripts start",
+    "dev": "set PORT=4000 && react-scripts start",
+    "prod": "set PORT=80 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

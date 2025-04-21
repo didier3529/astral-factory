@@ -1,7 +1,7 @@
 .sidebar {
     width: 15%;
     float: left;
-    background-color: #0a1929;
+    background-color: #000000;
     height: 100vh;
     padding: 5px;
     border-radius: 10px;
@@ -12,4 +12,10 @@
 
 .imageDimensions {
     background-color: rgba(255, 255, 255, 0.24);
+}
+
+.page {
+  width: 100%;
+  background-color: #000000;
+  min-height: 100vh;
 }

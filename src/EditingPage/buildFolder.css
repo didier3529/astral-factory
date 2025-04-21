@@ -1,82 +1,86 @@
 .element {
   margin: 0px;
   align-items: center;
-  line-height: 1.5;
-  letter-spacing: 0px;
-  font-family: monospace;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-family: var(--professional-font);
+  font-size: 18px;
   border-radius: 5px;
   outline: 0px;
   width: 100%;
-  padding-top: 5px;
+  padding-top: 8px;
   display: flex;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
   justify-content: flex-start;
   transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  font-size: 0.875rem;
-  color: #f1f1f1;
+  color: white;
   padding-left: 31px;
+  background-color: #000000;
+  text-transform: uppercase;
 }
 
 .rarityFolder {
   margin: 0px;
   align-items: center;
-  line-height: 1.5;
-  letter-spacing: 0px;
-  font-family: monospace;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-family: var(--professional-font);
+  font-size: 18px;
   border-radius: 5px;
   outline: 0px;
   width: 100%;
-  padding-top: 5px;
+  padding-top: 8px;
   display: flex;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
   justify-content: flex-start;
   transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  font-size: 0.875rem;
-  color: #f1f1f1;
-  padding-left: 31px;
   color: #ffffff;
+  padding-left: 31px;
   background-color: #d4d4d496;
+  text-transform: uppercase;
 }
 
 .rarityText {
   color: #fff;
-  margin: 10px;
+  margin: 12px;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .rarityText:hover {
-background-color: rgb(121, 121, 121);
-border-radius: 10px;
+  background-color: rgb(121, 121, 121);
+  border-radius: 10px;
 }
 
 .elementSubfolder {
   margin: 0px;
   align-items: center;
-  line-height: 1.5;
-  letter-spacing: 0px;
-  font-family: monospace;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-family: var(--professional-font);
+  font-size: 16px;
   border-radius: 5px;
   outline: 0px;
   width: 100%;
   display: flex;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  padding-right: 5px;
+  padding-top: 8px;
+  padding-bottom: 12px;
+  padding-right: 8px;
   justify-content: flex-end;
-  
   transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  font-size: 0.875rem;
   color: #b2bac2;
+  text-transform: uppercase;
 }
 
 .element:hover {
-  color: #ffffff;
-  background-color: #2b4361;
+  background-color: rgba(77, 255, 77, 0.1);
+  color: #4DFF4D;
 }
 
 .elementSubfolder:hover {
-  color: #ffffff;
-  background-color: #0353a3;
+  color: #4DFF4D;
+  background-color: rgba(77, 255, 77, 0.1);
 }

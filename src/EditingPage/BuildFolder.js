@@ -35,12 +35,12 @@ export const Folders = (props) => {
           <div>
             <ListItem key={index1} button component="a" href="#">
               <Typography
-                style={{ backgroundColor: "#102841" }}
+                style={{ backgroundColor: "#000000" }}
                 className="element"
                 // eslint-disable-next-line react/jsx-no-duplicate-props
                 style={{
                   fontWeight: "bold",
-                  fontFamily: "monospace",
+                  fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 {folder.name.slice(0, 1).toUpperCase() + folder.name.slice(1)}
@@ -53,7 +53,7 @@ export const Folders = (props) => {
                   <Typography
                     className="elementSubfolder"
                     style={{
-                      fontFamily: "monospace",
+                      fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     {subfolder.name}

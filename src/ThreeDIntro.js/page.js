@@ -27,7 +27,7 @@ export const ThreeData = () => {
     const ID = { uuid: uuidv4() };
     sessionStorage.setItem("uuid", JSON.stringify(ID.uuid));
 
-    axios.post("http://localhost:8443/saveID", ID);
+    axios.post("http://localhost:4000/saveID", ID);
 
     window.location.href = "/selection";
   };
@@ -82,9 +82,9 @@ export const ThreeData = () => {
               color: "#000",
             }}
           >
-            <span aria-hidden="true">Sick Alien</span>
-            Sick Alien
-            <span aria-hidden="true">Sick Alien</span>
+            <span aria-hidden="true">ASTRAL FACTORY</span>
+            ASTRAL FACTORY
+            <span aria-hidden="true">ASTRAL FACTORY</span>
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export const ThreeData = () => {
               fontSize: "30px",
             }}
           >
-            NFT AUTOMATOR
+            NFT GENERATOR SUITE
           </h3>
         </div>
 
@@ -107,27 +107,6 @@ export const ThreeData = () => {
         >
           Enter
         </button>
-        <div style={{ zIndex: 3, display: "flex", justifyContent: "center" }}>
-          <p
-            className="homepageContent"
-            style={{
-              marginTop: "49vh",
-              bottom: "0",
-              zIndex: 3,
-              fontFamily: "monospace",
-              fontWeight: "400",
-              animation: "glow 2s ease-in-out infinite alternate",
-            }}
-          >
-            A tool to take the pain of creating NFTs away from you.
-          </p>
-        </div>
-        <img
-          src={require("./Alien.png")}
-          alt="AlienImage"
-          className="imageBackground"
-          style={{ zIndex: 2 }}
-        />
         <div>
           <AboutModalComponent
             isOpen={openAbout}

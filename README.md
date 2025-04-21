@@ -1,6 +1,6 @@
 <img width="1404" alt="Untitled" src="https://user-images.githubusercontent.com/34533393/153697623-744d20d8-f6e7-4874-b9d3-44507f3f3800.png">
 
-# Welcome to SickAlien X NFT Art Generator
+# Welcome to ASTRAL FACTORY X NFT GENERATOR SUITE
 
 
 # Our NFT Art Generator is the best Interactive tool to make NFTs.
@@ -12,7 +12,7 @@ The generative Art engine takes away all the pain of generating NFTs from you.
 Get a free OctoAliens NFT on joining our joining my socials , dont forget to tag me on twitter for a free giveaway ! We building a fam 😇.
 To find more about us - 
 
-👽 [Sick Alien Official Site](https://sickalien.store) - Live Now 
+👽 [ASTRAL FACTORY Official Site](https://sickalien.store) - Live Now 
 
 ☕ [Buy me a coffee :)](https://www.buymeacoffee.com/bitrix)
 

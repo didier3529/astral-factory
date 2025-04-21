@@ -55,13 +55,16 @@ html,body {
     margin: auto;
     transition: .3s;
     animation: glow 2s ease-in-out infinite alternate;
+    border: 2px solid #00E5FF;
+    text-shadow: 0 0 10px #4DFF4D;
   }
   
   .nice:hover{
-    background-color: rgba(365,365,365,0.5);
-    cursor: grab/pointer;
+    background-color: rgba(0, 229, 255, 0.1);
+    cursor: pointer;
     color: #ffffff;
     transition: .3s;
+    box-shadow: 0 0 20px #00E5FF;
   }
   
 .title {
@@ -102,10 +105,10 @@ html,body {
   
   @keyframes glow {
     from {
-      text-shadow: 0 0 20px #2d9da9;
+      text-shadow: 0 0 20px #00E5FF;
     }
     to {
-      text-shadow: 0 0 30px #34b3c1, 0 0 10px #4dbbc7;
+      text-shadow: 0 0 30px #00E5FF, 0 0 10px #4DFF4D;
     }
   }
 
@@ -114,8 +117,8 @@ html,body {
     font-weight: bold;
     text-transform: uppercase;
     position: relative;
-    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
-      0.025em 0.04em 0 #fffc00;
+    text-shadow: 0.05em 0 0 #00E5FF, -0.03em -0.04em 0 #4DFF4D,
+      0.025em 0.04em 0 #00E5FF;
     animation: glitch 725ms infinite;
   }
 

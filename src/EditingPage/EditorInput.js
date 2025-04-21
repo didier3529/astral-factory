@@ -11,10 +11,10 @@ export const EditorInput = (props) => {
 
   const commonStyle = {
     margin: "10px",
-    backgroundColor: "#c1c9d1",
     padding: "5px",
-    borderRadius: "10px",
-    boxShadow: "1px 3px 1px #afafaf",
+    borderRadius: "var(--astral-border-radius)",
+    color: "var(--astral-teal)",
+    fontFamily: "var(--professional-font)"
   };
 
   const handleFinalClick = () => {
@@ -27,84 +27,112 @@ export const EditorInput = (props) => {
   const [input4, setInput4] = React.useState({ value: null });
 
   return (
-    <div
-      style={{
-        marginTop: "10px",
-        backgroundColor: "#dee2e7",
-        padding: "7px",
-        borderRadius: "10px",
-        boxShadow: "1px 3px 1px #acacaf",
-      }}
-    >
-      <div
+    <div className="editor-control-panel">
+      <div 
+        className="editor-section-title"
         style={{
-          justifyContent: "center",
-          display: "flex",
-          fontWeight: "bold",
+          color: "#00E5FF",
+          textAlign: "center",
           fontSize: "20px",
-          fontFamily: "monospace",
+          fontFamily: "var(--professional-font)",
+          marginBottom: "20px",
+          textShadow: "0 0 10px rgba(0, 229, 255, 0.5)",
+          textTransform: "uppercase"
         }}
       >
-        Manual Input
+        MANUAL INPUT
       </div>
-      <div style={commonStyle}>
-        <div style={{ fontWeight: "bolder", fontFamily: "monospace" }}>
-          Height:
-        </div>
-        <div>
-          <TextField
-            size="small"
-            variant="standard"
-            inputProps={{ style: { textAlign: "center" } }}
-            placeholder="(in px)"
-            onChange={(event) => {
-              setInput1({
-                name: "height",
-                value: JSON.parse(event.target.value),
-              });
-            }}
-            onBlur={handleFinalClick}
-          />
-        </div>
-      </div>
-      <div style={commonStyle}>
-        <div style={{ fontWeight: "bold", fontFamily: "monospace" }}>
-          Width:
-        </div>
 
-        <TextField
-          size="small"
-          variant="standard"
-          inputProps={{ style: { textAlign: "center" } }}
+      <div className="input-group">
+        <label 
+          className="input-label"
+          style={{
+            color: "#00E5FF",
+            fontFamily: "var(--professional-font)",
+            fontSize: "14px",
+            marginBottom: "8px",
+            display: "block",
+            textShadow: "0 0 5px rgba(0, 229, 255, 0.3)",
+            textTransform: "uppercase"
+          }}
+        >
+          HEIGHT:
+        </label>
+        <input
+          className="editor-input"
+          type="text"
           placeholder="(in px)"
           onChange={(event) => {
-            setInput2({ name: "width", value: JSON.parse(event.target.value) });
+            setInput1({
+              name: "height",
+              value: JSON.parse(event.target.value),
+            });
           }}
-          onBlur={handleFinalClick}
         />
       </div>
 
-      <div style={commonStyle}>
-        <div style={{ fontWeight: "bold", fontFamily: "monospace" }}>
-          Total Copies:
-        </div>
-
-        <TextField
-          size="small"
-          defaultValue={100}
-          inputProps={{ min: 0, style: { textAlign: "center" } }}
-          margin="dense"
-          variant="outlined"
+      <div className="input-group" style={{ marginTop: "20px" }}>
+        <label 
+          className="input-label"
+          style={{
+            color: "#00E5FF",
+            fontFamily: "var(--professional-font)",
+            fontSize: "14px",
+            marginBottom: "8px",
+            display: "block",
+            textShadow: "0 0 5px rgba(0, 229, 255, 0.3)",
+            textTransform: "uppercase"
+          }}
+        >
+          WIDTH:
+        </label>
+        <input
+          className="editor-input"
+          type="text"
+          placeholder="(in px)"
           onChange={(event) => {
-            setInput4({ value: JSON.parse(event.target.value) });
+            setInput2({
+              name: "width",
+              value: JSON.parse(event.target.value),
+            });
           }}
-          error={input4.value > 10000}
-          helperText={input4 > 10000 ? "Should be less than 10000" : ""}
-          onBlur={handleFinalClick}
         />
       </div>
-      <div style={{ justifyContent: "center", display: "flex" }}>
-        <Button variant="contained" color="primary" onClick={handleFinalClick}>
+
+      <div className="input-group" style={{ marginTop: "20px" }}>
+        <label 
+          className="input-label"
+          style={{
+            color: "#00E5FF",
+            fontFamily: "var(--professional-font)",
+            fontSize: "14px",
+            marginBottom: "8px",
+            display: "block",
+            textShadow: "0 0 5px rgba(0, 229, 255, 0.3)",
+            textTransform: "uppercase"
+          }}
+        >
+          TOTAL COPIES:
+        </label>
+        <input
+          className="editor-input"
+          type="text"
+          placeholder="Enter number of copies"
+          onChange={(event) => {
+            setInput4({
+              name: "copies",
+              value: JSON.parse(event.target.value),
+            });
+          }}
+        />
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: "25px" }}>
+        <Button
+          className="editor-button"
+          variant="contained"
+          onClick={handleFinalClick}
+        >
           Submit
         </Button>
       </div>

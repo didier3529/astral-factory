@@ -20,7 +20,7 @@ export const Items = (props) => {
           width: `${props.imageWidth}px`,
           position: "relative",
         }}
-        className="imageDimensions"
+        className={`imageDimensions ${props.className || ''}`}
         ref={props.parent}
       >
         {elements &&
