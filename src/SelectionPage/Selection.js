@@ -1,11 +1,9 @@
 import React from "react";
 import { NavComponent } from "../EditingPage/Navbar";
 import { Button } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
-import "./style.css";
-import { ImageDimension } from "../Webpages";
 import { MyDropzone } from "./Dropzone";
-import axios from "axios";
+import "./style.css";
+import './astral-colors.css';
 
 export const Selection = () => {
   const handleClick = () => {
@@ -13,77 +11,26 @@ export const Selection = () => {
   };
 
   return (
-    <div>
-      <NavComponent style={{ zIndex: 2 }} />
-      <div className="area">
-        <h1
-          style={{
-            fontFamily: "monospace",
-            color: "#fff",
-          }}
-        >
-          Upload Files
-        </h1>
-
-        <div
-          style={{
-            width: "40vw",
-            marginLeft: "30vw",
-            height: "50vh",
-            backgroundColor: "#1313133b",
-            marginTop: "10px",
-            zIndex: 2,
-            borderRadius: "5px",
-            padding: "10px",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "monospace",
-              fontSize: "30px",
-              display: "flex",
-              justifyContent: "center",
-              color: "#000",
-            }}
-          >
-            Click below to Upload Files
+    <div className="selection-container">
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}>
+        <NavComponent />
+      </div>
+      <div className="content-area">
+        <h1 className="page-title">Upload Files</h1>
+        <div className="upload-container">
+          <div className="upload-box">
+            <MyDropzone />
           </div>
-          <MyDropzone />
         </div>
-
-        <div
-          style={{
-            justifyContent: "center",
-            display: "flex",
-            marginTop: "50px",
-            paddingBottom: "10px",
-          }}
-        >
+        <div className="button-container">
           <Button
             variant="contained"
-            color="secondary"
-            size="large"
+            className="continue-button"
             onClick={handleClick}
-            style={{ zIndex: 2 }}
           >
             Continue
           </Button>
         </div>
-      </div>
-
-      <div className="area">
-        <ul className="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
       </div>
     </div>
   );
