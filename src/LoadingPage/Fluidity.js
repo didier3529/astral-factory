@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { NavComponent } from "../EditingPage/Navbar";
+import { NavComponent } from "../EditingPage/Navbar copy";
 import { ToastContainer, toast } from "react-toastify";
 import { Button, CircularProgress } from "@material-ui/core";
 

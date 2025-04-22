@@ -1,0 +1,183 @@
+:root {
+  /* Colors */
+  --primary: #007AFF;
+  --secondary: #5856D6;
+  --success: #34C759;
+  --warning: #FF9500;
+  --danger: #FF3B30;
+  --dark: #1C1C1E;
+  --light: #F2F2F7;
+  
+  /* Typography */
+  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-size-base: 16px;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Base styles */
+html {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset button styles */
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+/* Focus styles */
+:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Import Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global text styles */
+.text-primary {
+  color: #ffffff;
+  font-family: var(--professional-font);
+  font-size: var(--text-size-normal);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(77, 255, 77, 0.3);
+}
+
+.text-secondary {
+  color: #ffffff;
+  font-family: var(--professional-font);
+  font-size: var(--text-size-normal);
+  font-weight: 400;
+  text-shadow: 0 0 5px rgba(77, 255, 77, 0.3);
+}
+
+/* Base styles */
+html,
+#root,
+#root > div {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  background-repeat: repeat;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--astral-black);
+  background-image: none;
+  font-family: var(--professional-font);
+}
+
+#content {
+  background-color: var(--astral-black);
+  height: 100%;
+  position: relative;
+}
+
+/* Common components */
+.button {
+  background-color: var(--astral-teal);
+  color: var(--astral-black);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--astral-border-radius);
+  transition: all 0.2s ease;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--astral-green);
+  box-shadow: var(--astral-glow);
+}
+
+.input {
+  background-color: rgba(10, 15, 20, 0.7);
+  border: 1px solid var(--astral-green);
+  color: white;
+  border-radius: var(--astral-border-radius);
+  padding: 5px 8px;
+  margin: 0 5px;
+  font-family: var(--professional-font);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--astral-teal);
+  box-shadow: var(--astral-glow);
+}
+
+/* Grid background */
+.grid-background {
+  background-color: transparent;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+} 

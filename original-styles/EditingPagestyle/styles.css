@@ -1,0 +1,31 @@
+html,
+#root,
+#root > div {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  background-repeat: repeat;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000000;
+  background-image: none;
+}
+
+#content {
+  background-color: #000000;
+  height: 100%;
+  position: relative;
+}
+
+.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label {
+  background-color: #000000 !important;
+}
+
+.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover {
+  background-color: #000000;
+}
+

@@ -426,4 +426,102 @@ div[style*="border"] {
 }
 
 /* Add link to Google Fonts in your HTML head */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Roboto+Mono:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&family=Fira+Code:wght@300;400;500&family=Source+Code+Pro:wght@300;400;500&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Roboto+Mono:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&family=Fira+Code:wght@300;400;500&family=Source+Code+Pro:wght@300;400;500&display=swap');
+
+/* Loading Container */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--astral-black);
+  color: var(--astral-green);
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  text-align: center;
+  font-family: var(--professional-font);
+  color: var(--astral-green);
+  text-shadow: 0 0 10px rgba(77, 255, 77, 0.3);
+}
+
+.retry-text {
+  font-size: 0.9rem;
+  color: #FFA500;
+  margin-top: 10px;
+  font-family: var(--professional-font);
+}
+
+/* Error Container */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--astral-black);
+  padding: 2rem;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error-message {
+  background-color: rgba(255,77,77,0.1);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  text-align: center;
+  color: #FF4D4D;
+}
+
+.retry-message {
+  color: #FFA500;
+  margin-top: 10px;
+}
+
+/* Editor Container */
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--astral-black);
+}
+
+.editor-navbar {
+  max-height: 20px;
+  z-index: 21;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--astral-green);
+}
+
+.editor-content {
+  flex: 1;
+  margin: 2px;
+  padding: 15px;
+  background-color: var(--astral-black);
+  border-radius: var(--astral-border-radius);
+}
+
+.editing-page-wrapper {
+  min-height: 100vh;
+  padding-top: 60px; /* Height of the navbar */
+  background-color: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.editing-page-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.editing-page-content {
+  flex: 1;
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+} 

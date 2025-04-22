@@ -44,14 +44,15 @@
   },
   "scripts": {
     "devserver": "nodemon server.js",
-    "server": "node server.js",
-    "dev": "set PORT=4000 && react-scripts start",
+    "server": "set PORT=8443 && node server.js",
+    "dev": "set PORT=3001 && set REACT_APP_SERVER_URL=http://localhost:8443 && react-scripts start",
     "prod": "set PORT=80 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prodall": "npm run server & npm run prod",
-    "devall": "npm run server & npm run dev"
+    "prodall": "npm run server & npm run dev",
+    "devall": "npm run server & npm run dev",
+    "start": "set PORT=3001 && react-scripts start"
   },
   "eslintConfig": {
     "extends": [

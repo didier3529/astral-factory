@@ -1,0 +1,8 @@
+/* Base theme and variables */
+@import './theme.css';
+
+/* Component styles */
+@import './components/error-page.css';
+@import './components/selection-page.css';
+@import './components/editing-page.css';
+@import './components/loading.css'; 

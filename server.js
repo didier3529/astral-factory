@@ -21,10 +21,7 @@ const db = lowDb(new FileSync("./src/traffic.json"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(cors({
-  origin: 'http://localhost:4000', // Allow requests from React app
-  credentials: true
-}));
+app.use(cors());
 const port = process.env.PORT || 8443;
 
 // Create necessary directories if they don't exist
@@ -39,18 +36,43 @@ if (!fs.existsSync(generatedDir)) {
   fs.mkdirSync(generatedDir, { recursive: true });
 }
 
+// Serve static files from the layers directory
+app.use('/uploads', express.static(path.join(__dirname, 'src', 'EditingPage', 'layers')));
+
 const dirTree = require("directory-tree");
 
 app.get("/getFolderTree", (req, res) => {
   const uuid = req.query.uuid;
   const treePath = path.join(layersDir, uuid);
   
-  if (!fs.existsSync(treePath)) {
-    return res.status(404).json({ error: "Folder not found" });
+  try {
+    if (!fs.existsSync(treePath)) {
+      return res.status(404).json({ 
+        error: "Folder not found. Please ensure you have uploaded files first.",
+        path: treePath
+      });
+    }
+    
+    const tree = dirTree(treePath, {
+      extensions: /\.(jpg|jpeg|png)$/i,
+      normalizePath: true
+    });
+
+    if (!tree || !tree.children || tree.children.length === 0) {
+      return res.status(404).json({ 
+        error: "No valid image files found in the specified folder.",
+        path: treePath
+      });
+    }
+
+    res.json(tree);
+  } catch (error) {
+    console.error('Error processing folder tree:', error);
+    res.status(500).json({ 
+      error: "Failed to process folder structure",
+      details: error.message
+    });
   }
-  
-  const tree = dirTree(treePath);
-  res.json(tree);
 });
 
 app.get("/getTotalUsers", (req, res) => {
@@ -66,16 +88,21 @@ app.get("/getTotalItems", (req, res) => {
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const uuid = file.fieldname.split('/')[0];
-    const targetDir = path.join(__dirname, 'src', 'EditingPage', 'layers', uuid);
+    const targetPath = path.join(__dirname, 'src', 'EditingPage', 'layers', uuid);
     
-    if (!fs.existsSync(targetDir)) {
-      fs.mkdirSync(targetDir, { recursive: true });
+    if (fs.existsSync(targetPath)) {
+      cb(null, targetPath);
+    } else {
+      fs.mkdirSync(targetPath, { recursive: true });
+      cb(null, targetPath);
     }
-    
-    cb(null, targetDir);
   },
   filename: function (req, file, cb) {
     const fileName = file.fieldname.split('/')[1];
+    if (!fileName) {
+      cb(new Error('Invalid file path format'));
+      return;
+    }
     cb(null, fileName);
   },
 });
@@ -136,49 +163,27 @@ app.post("/uploadFiles", (req, res) => {
 const fields = [];
 var filePaths = new Set();
 
-app.post("/uploadPath", (req, res) => {
-  console.log("Path registration request received");
+app.post("/register-paths", (req, res) => {
+  const { paths } = req.body;
   
-  if (!Array.isArray(req.body)) {
-    console.error("Invalid request body: not an array");
-    return res.status(400).json({ 
-      error: "Expected an array of file paths",
-      received: typeof req.body
-    });
+  if (!Array.isArray(paths)) {
+    return res.status(400).json({ error: 'Invalid data format. Expected an array of paths.' });
   }
 
+  console.log('Registering paths:', paths);
+  
   try {
-    // Clear previous paths
-    fields.length = 0;
-    filePaths.clear();
-
-    req.body.forEach((file, index) => {
-      if (!file.path || !file.uuid) {
-        throw new Error(`Invalid file data at index ${index}: missing path or uuid`);
+    paths.forEach(filePath => {
+      const fullPath = path.join(__dirname, 'src', 'EditingPage', 'layers', filePath);
+      if (!fs.existsSync(fullPath)) {
+        throw new Error(`File not found: ${filePath}`);
       }
-      const filePath = file.path;
-      const hashKey = file.uuid;
-      const fullPath = hashKey + "/" + filePath;
-      filePaths.add(fullPath);
-      console.log(`Registered path: ${fullPath}`);
     });
-
-    filePaths.forEach((file) => {
-      fields.push({ name: file });
-    });
-
-    console.log(`Successfully registered ${filePaths.size} paths`);
-    res.status(200).json({ 
-      message: "Paths registered successfully",
-      paths: Array.from(filePaths),
-      count: filePaths.size
-    });
+    
+    res.json({ message: 'Paths registered successfully' });
   } catch (error) {
-    console.error("Path registration error:", error);
-    res.status(400).json({ 
-      error: "Failed to register paths",
-      details: error.message
-    });
+    console.error('Error registering paths:', error);
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -286,7 +291,7 @@ app.post("/submitDetails", (request, response) => {
         JSON.parse(layerData[index].height)
       );
       const buffer = canvas.toBuffer("image/png", 0);
-      fs.writeFileSync(__dirname + `/generated/${uuid}/${hash}.png`, buffer);
+      fs.writeFileSync(path.join(__dirname, 'generated', uuid, `${hash}.png`), buffer);
 
       if (tree.children.length === index + 1) {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -389,13 +394,23 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-app.listen(port, '0.0.0.0', () => {
+const server = app.listen(port, 'localhost', () => {
   // Uncommented for connecting to mongoDB
   // dbo.connectToServer(function (err) {
   //   if (err) console.error(err);
   // });
   console.log(`Server is running on port: ${port}`);
-  console.log(`Server is ready to accept connections`);
+  console.log(`Server is accessible at http://localhost:${port}`);
+});
+
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`Port ${port} is already in use. Please try a different port.`);
+    process.exit(1);
+  } else {
+    console.error('Server error:', error);
+    process.exit(1);
+  }
 });
 
 //s3Actions.uploadFile("uuid/src/EditingPage/layers/ball/red eye ball_sr.png");

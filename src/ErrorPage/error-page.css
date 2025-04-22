@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+.error-page {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    overflow: hidden;
+    position: relative;
+}
+
+.error-container {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Space Mono', monospace;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.error-text {
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 700;
+    letter-spacing: 0.5rem;
+    margin: 0;
+    background: linear-gradient(to right, #00ffcc, #00e5ff, #00ff99);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.7), 0 0 30px rgba(0, 229, 255, 0.5);
+    animation: pulse 2s infinite alternate, float 6s ease-in-out infinite;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.error-text::after {
+    content: '404';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(8px);
+    color: rgba(0, 255, 183, 0.3);
+    transform: translateZ(-10px);
+}
+
+.error-message {
+    font-size: 1.2rem;
+    color: #b3b3b3;
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 0.5s forwards;
+}
+
+.return-button {
+    background: linear-gradient(45deg, #00ffcc, #00e5ff);
+    border: none;
+    border-radius: 30px;
+    padding: 1rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 1s forwards;
+}
+
+.return-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+}
+
+.return-button:active {
+    transform: translateY(0);
+}
+
+.return-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.return-button:hover::before {
+    left: 100%;
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 20px rgba(0, 255, 204, 0.5),
+                     0 0 30px rgba(0, 229, 255, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 25px rgba(0, 255, 204, 0.8),
+                     0 0 40px rgba(0, 229, 255, 0.6),
+                     0 0 60px rgba(0, 255, 204, 0.4);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-20px) rotateX(5deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.star {
+    position: absolute;
+    background-color: #00ffaa;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 1;
+    animation: twinkle var(--duration, 3s) infinite var(--delay, 0s);
+}
+
+.star::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    filter: blur(1px);
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(1); filter: blur(0); }
+    50% { opacity: 1; transform: scale(1.4); filter: blur(1px); }
+    100% { opacity: 0.2; transform: scale(1); filter: blur(0); }
+}
+
+/* Star field effect */
+.star-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 600px;
+    z-index: 1;
+} 

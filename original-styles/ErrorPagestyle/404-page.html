@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Error - Page Not Found</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            overflow: hidden;
+        }
+        
+        .error-container {
+            text-align: center;
+            color: #ffffff;
+            font-family: 'Space Mono', monospace;
+            position: relative;
+        }
+        
+        .error-text {
+            font-size: 8rem;
+            font-weight: 700;
+            letter-spacing: 0.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #00ffcc, #00e5ff, #00ff99);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.7), 0 0 30px rgba(0, 229, 255, 0.5);
+            animation: pulse 2s infinite alternate;
+            position: relative;
+        }
+        
+        .error-text::after {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(8px);
+            color: rgba(0, 255, 183, 0.3);
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 20px rgba(0, 255, 204, 0.5), 0 0 30px rgba(0, 229, 255, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(0, 255, 204, 0.8), 0 0 40px rgba(0, 229, 255, 0.6);
+            }
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #00ffaa;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-text">404</h1>
+    </div>
+    
+    <script>
+        // Add stars to the background
+        const body = document.querySelector('body');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            body.appendChild(star);
+        }
+    </script>
+</body>
+</html>

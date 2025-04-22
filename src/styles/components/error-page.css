@@ -1,0 +1,113 @@
+/* Error page styling */
+.error-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--astral-black);
+  overflow: hidden;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-xl);
+  text-align: center;
+  background-color: var(--light);
+}
+
+.error-icon {
+  font-size: var(--font-size-2xl);
+  color: var(--danger);
+  margin-bottom: var(--spacing-lg);
+}
+
+.error-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.error-message {
+  font-size: var(--font-size-base);
+  color: var(--dark);
+  opacity: 0.8;
+  margin-bottom: var(--spacing-lg);
+  max-width: 600px;
+}
+
+.error-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--primary);
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.error-button:hover {
+  background-color: var(--secondary);
+}
+
+.error-button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.error-text {
+  font-size: 8rem;
+  font-weight: 700;
+  letter-spacing: 0.5rem;
+  margin: 0;
+  background: linear-gradient(to right, #00ffcc, var(--astral-teal), var(--astral-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(0, 255, 204, 0.7), 0 0 30px rgba(0, 229, 255, 0.5);
+  animation: pulse 2s infinite alternate;
+  position: relative;
+}
+
+.error-text::after {
+  content: '404';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: blur(8px);
+  color: rgba(0, 255, 183, 0.3);
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.5), 0 0 30px rgba(0, 229, 255, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 25px rgba(0, 255, 204, 0.8), 0 0 40px rgba(0, 229, 255, 0.6);
+  }
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: var(--astral-teal);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.2; transform: scale(1); }
+} 

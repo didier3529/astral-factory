@@ -1,0 +1,74 @@
+:root {
+  --astral-black: #000000;
+  --astral-teal: #00E5FF;  /* Bright teal from logo */
+  --astral-green: #4DFF4D;  /* Bright green from logo */
+  --astral-blue: #4a90e2;   /* Current blue in selection page */
+  --astral-glow: 0 0 15px rgba(0, 229, 255, 0.7);
+  --astral-border-radius: 8px;
+}
+
+/* Override existing styles with higher specificity */
+.selection-container .page-title {
+  color: var(--astral-teal) !important;
+  text-shadow: 0 0 20px var(--astral-teal) !important;
+  animation: title-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+  from {
+    text-shadow: 0 0 20px var(--astral-teal);
+  }
+  to {
+    text-shadow: 0 0 30px var(--astral-teal), 0 0 10px var(--astral-green);
+  }
+}
+
+.selection-container .upload-box,
+.selection-container .dropzone {
+  border: 2px dashed var(--astral-teal) !important;
+  transition: all 0.3s ease !important;
+}
+
+.selection-container .upload-box:hover,
+.selection-container .dropzone:hover,
+.selection-container .dropzone-active {
+  border-color: var(--astral-green) !important;
+  box-shadow: var(--astral-glow) !important;
+}
+
+.selection-container .dropzone-content svg {
+  color: var(--astral-teal) !important;
+}
+
+.selection-container .dropzone-content svg:hover {
+  color: var(--astral-green) !important;
+}
+
+.selection-container .continue-button {
+  background-color: var(--astral-teal) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.selection-container .continue-button:hover {
+  background-color: var(--astral-green) !important;
+  box-shadow: var(--astral-glow) !important;
+  transform: translateY(-1px);
+}
+
+.selection-container .progress-indicator {
+  color: var(--astral-teal) !important;
+}
+
+.selection-container .progress-bar {
+  background-color: var(--astral-teal) !important;
+}
+
+/* Toast customization */
+.Toastify__toast--success {
+  background-color: var(--astral-green) !important;
+}
+
+.Toastify__progress-bar {
+  background-color: var(--astral-teal) !important;
+} 
